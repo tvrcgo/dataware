@@ -1,0 +1,21 @@
+{
+  "name": "square",
+  "version": "0.1.0",
+  "description": "Data square",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tvrcgo/square.git"
+  },
+  "author": "tvrcgo",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "^2.2.21"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
