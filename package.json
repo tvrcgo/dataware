@@ -4,7 +4,7 @@
   "description": "Data square",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*.js"
+    "test": "mocha --require intelli-espower-loader test/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -16,6 +16,8 @@
     "mongodb": "^2.2.21"
   },
   "devDependencies": {
-    "mocha": "^3.2.0"
+    "intelli-espower-loader": "^1.0.1",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.4"
   }
 }

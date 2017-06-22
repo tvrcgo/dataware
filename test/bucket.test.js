@@ -1,22 +1,34 @@
 
 const Square = require('../index')
-const assert = require('assert')
+const assert = require('power-assert')
 
 describe('square', () => {
 
   const square = new Square({
-    url: 'mongodb://localhost:27017/square?authSource=admin'
+    endpoint: 'mongodb://username:password@host:27017/?authSource=admin'
   })
 
   describe('#bucket', () => {
-    const bucket = square.bucket('testbucket')
+    const bucket = square.bucket('test/testbucket')
     let tmpId = ''
 
     it('post object', (done) => {
       bucket.body({ title: 'hello' }).post().then(ret => {
-        assert(ret.stories.length === 1)
-        assert(ret.stories[0].title = 'hello')
-        tmpId = ret.stories[0]._id
+        assert(ret.story.title = 'hello')
+        tmpId = ret.story._id
+        done()
+      })
+    })
+
+    it('batch object', (done) => {
+      bucket.body([
+        { title: 't1' },
+        { title: 't2' },
+        { title: 't3' }
+      ]).batch().then(ret => {
+        assert(ret.stories.length === 3)
+        assert(ret.meta.ok === 1)
+        assert(ret.meta.n === 3)
         done()
       })
     })
@@ -31,9 +43,8 @@ describe('square', () => {
 
     it('update object', (done) => {
       bucket.body({ title: 'abc' }).post().then(ret => {
-        assert(ret.stories.length === 1)
-        assert(ret.stories[0].title === 'abc')
-        const storyId = ret.stories[0]._id
+        assert(ret.story.title === 'abc')
+        const storyId = ret.story._id
         bucket.body({ title: 'def' }).update(storyId).then(updret => {
           assert(updret.meta.ok === 1)
           assert(updret.meta.nModified === 1)

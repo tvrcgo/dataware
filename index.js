@@ -1,3 +1,2 @@
-const Square = require('./lib/square')
 
-module.exports = Square
+module.exports = require('./lib/square')
