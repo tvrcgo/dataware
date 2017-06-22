@@ -5,7 +5,9 @@ const assert = require('power-assert')
 describe('bucket', () => {
 
   const square = new Square({
-    endpoint: 'mongodb://username:password@host:27017/?authSource=admin'
+    auth: 'username:password',
+    authSource: 'admin',
+    endpoint: 'host:27017'
   })
   const bucket = square.bucket('test/testbucket')
   let tmpId = ''

@@ -16,7 +16,9 @@ npm i tvrcgo/square --save
 import Square from 'square'
 
 const square = new Square({
-  endpoint: 'mongodb://username:***@host:port'
+  auth: 'username:password',
+  authSource: 'admin',
+  endpoint: 'host:27017'
 })
 ```
 
@@ -26,6 +28,7 @@ const square = new Square({
 const bucket = square.bucket('db/collection')
 
 bucket.body(object).post()
+bucket.body(object).post('object-id')
 bucket.body([ object1, object2, object3 ]).batch()
 bucket.body(patchBody).update('object-id')
 bucket.get('object-id')
