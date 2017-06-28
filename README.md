@@ -16,7 +16,7 @@ import Dataware from 'dataware'
 const dataware = new Dataware({
   auth: 'username:password',
   authSource: 'admin',
-  endpoint: 'host:27017'
+  endpoint: 'localhost:27017'
 })
 ```
 
@@ -38,5 +38,16 @@ bucket.remove('object-id')
 #### Query
 
 ```js
-
+bucket.query({
+  where: {
+    title: {
+      $in: ['t1', 't2', 't3']
+    }
+  },
+  skip: 5,
+  limit: 10,
+  sort: {
+    created_at: -1
+  }
+})
 ```

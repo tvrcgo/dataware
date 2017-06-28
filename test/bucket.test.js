@@ -31,6 +31,18 @@ describe('bucket', () => {
     })
   })
 
+  it('query objects', (done) => {
+    bucket.query({
+      where: {
+        title: { $in: ['t1', 't2', 't3'] }
+      },
+      limit: 3
+    }).then(ret => {
+      assert(ret.length === 3)
+      done()
+    })
+  })
+
   it('get object', (done) => {
     bucket.get(tmpId).then(ret => {
       assert(ret.title === 'hello')
