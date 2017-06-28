@@ -1,14 +1,14 @@
 {
-  "name": "square",
-  "version": "0.1.0",
-  "description": "Data square",
+  "name": "dataware",
+  "version": "0.0.1",
+  "description": "DataWare",
   "main": "index.js",
   "scripts": {
     "test": "mocha --require intelli-espower-loader test/**/*.test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:tvrcgo/square.git"
+    "url": "git@github.com:tvrcgo/dataware.git"
   },
   "author": "tvrcgo",
   "license": "MIT",

@@ -1,2 +1,2 @@
 
-module.exports = require('./lib/square')
+module.exports = require('./lib/dataware')

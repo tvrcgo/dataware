@@ -1,15 +1,15 @@
 
-const Square = require('../index')
+const Dataware = require('../index')
 const assert = require('power-assert')
 
 describe('bucket', () => {
 
-  const square = new Square({
     auth: 'username:password',
+  const dw = new Dataware({
     authSource: 'admin',
     endpoint: 'example.com:27017'
   })
-  const bucket = square.bucket('test/testbucket')
+  const bucket = dw.bucket('test/testbucket')
   let tmpId = ''
 
   it('post object', (done) => {
