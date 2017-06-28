@@ -4,10 +4,8 @@ const assert = require('power-assert')
 
 describe('bucket', () => {
 
-    auth: 'username:password',
   const dw = new Dataware({
-    authSource: 'admin',
-    endpoint: 'example.com:27017'
+    endpoint: 'localhost:27017'
   })
   const bucket = dw.bucket('test/testbucket')
   let tmpId = ''
@@ -62,5 +60,9 @@ describe('bucket', () => {
         done()
       })
     })
+  })
+
+  it('close dataware', () => {
+    dw.close()
   })
 })
