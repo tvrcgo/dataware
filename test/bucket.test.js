@@ -2,7 +2,7 @@
 const Dataware = require('../index')
 const assert = require('power-assert')
 
-describe('bucket', () => {
+describe('bucket', function() {
 
   const dw = new Dataware({
     endpoint: 'localhost:27017'
@@ -51,15 +51,38 @@ describe('bucket', () => {
     })
   })
 
-  it('update object', (done) => {
-    bucket.body({ title: 'abc' }).post().then(ret => {
+  it('patch object', (done) => {
+    bucket.body({ title: 'abc', desc: 'def' }).post().then(ret => {
       assert(ret.story.title === 'abc')
+      assert(ret.story.desc === 'def')
       const storyId = ret.story._id
-      bucket.body({ title: 'def' }).update(storyId).then(updret => {
+      bucket.body({ title: 'def' }).patch(storyId).then(updret => {
         assert(updret.meta.ok === 1)
         assert(updret.meta.nModified === 1)
         assert(updret.meta.n === 1)
-        done()
+        bucket.get(storyId).then(ret3 => {
+          assert(ret3.title === 'def')
+          assert(ret3.desc === 'def')
+          done()
+        })
+      })
+    })
+  })
+
+  it('put object', (done) => {
+    bucket.body({ title: 'abc', desc: 'def' }).post().then(ret => {
+      assert(ret.story.title === 'abc')
+      assert(ret.story.desc === 'def')
+      const storyId = ret.story._id
+      bucket.body({ title: 'def' }).put(storyId).then(updret => {
+        assert(updret.meta.ok === 1)
+        assert(updret.meta.nModified === 1)
+        assert(updret.meta.n === 1)
+        bucket.get(storyId).then(ret3 => {
+          assert(ret3.title === 'def')
+          assert(ret3.desc === undefined)
+          done()
+        })
       })
     })
   })

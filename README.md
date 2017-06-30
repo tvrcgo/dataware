@@ -30,9 +30,11 @@ const bucket = dataware.bucket('db/collection')
 bucket.body(object).post()
 bucket.body(object).post('object-id')
 bucket.body([ object1, object2, object3 ]).batch()
-bucket.body(patchBody).update('object-id')
+bucket.body(patchBody).patch('object-id')
+bucket.body(newBody).put('object-id')
 bucket.get('object-id')
 bucket.remove('object-id')
+bucket.drop()
 ```
 
 #### Query
