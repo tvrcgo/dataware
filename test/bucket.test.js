@@ -13,6 +13,7 @@ describe('bucket', function() {
   it('post object', function* () {
     const ret = yield bucket.body({ title: 'hello' }).post()
     assert(ret.story.title = 'hello')
+    tmpId = ret.story._id
   })
 
   it('batch objects', function* () {
@@ -38,8 +39,8 @@ describe('bucket', function() {
 
   it('get object', function* () {
     const object = yield bucket.get(tmpId)
-    assert(ret.title === 'hello')
-    assert(ret._id.toString() === tmpId.toString())
+    assert(object.title === 'hello')
+    assert(object._id.toString() === tmpId.toString())
   })
 
   it('patch object', function* () {
@@ -64,7 +65,7 @@ describe('bucket', function() {
     assert(ret1.story.desc === 'def')
 
     const storyId = ret1.story._id
-    const ret2 = bucket.body({ title: 'def' }).put(storyId)
+    const ret2 = yield bucket.body({ title: 'def' }).put(storyId)
     assert(ret2.meta.ok === 1)
     assert(ret2.meta.nModified === 1)
     assert(ret2.meta.n === 1)
@@ -77,8 +78,8 @@ describe('bucket', function() {
   it('remove object', function* () {
     yield bucket.body({ title: 'story title' }).post('test-story')
     const ret = yield bucket.remove('test-story')
-    assert(rmret.meta.ok === 1)
-    assert(rmret.meta.n === 1)
+    assert(ret.meta.ok === 1)
+    assert(ret.meta.n === 1)
   })
 
   it('close dataware', () => {
