@@ -5,7 +5,8 @@ const assert = require('power-assert')
 describe('bucket', function() {
 
   const dw = new Dataware({
-    endpoint: 'localhost:27017'
+    auth: 'weilai:weilai',
+    endpoint: 'tvrcgo.com:27077'
   })
   const bucket = dw.bucket('test/testbucket')
   let tmpId = ''
@@ -82,7 +83,17 @@ describe('bucket', function() {
     assert(ret.meta.n === 1)
   })
 
-  it('close dataware', () => {
-    dw.close()
+  it('other bucket', function* () {
+    const bkt = dw.bucket('test/testbucket2')
+    const obj = yield bkt.body({ title: 'other' }).post()
+    assert(obj.story.title === 'other')
+    assert(obj.meta.ok === 1)
+    assert(obj.meta.n === 1)
   })
+
+  it('drop bucket', function* () {
+    const ret = yield bucket.drop()
+    assert(ret === true)
+  })
+
 })
