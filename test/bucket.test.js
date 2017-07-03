@@ -5,16 +5,15 @@ const assert = require('power-assert')
 describe('bucket', function() {
 
   const dw = new Dataware({
-    auth: 'weilai:weilai',
-    endpoint: 'tvrcgo.com:27077'
+    endpoint: 'localhost:27017'
   })
   const bucket = dw.bucket('test/testbucket')
   let tmpId = ''
 
   it('post object', function* () {
     const ret = yield bucket.body({ title: 'hello' }).post()
-    assert(ret.story.title = 'hello')
-    tmpId = ret.story._id
+    assert(ret.data.title = 'hello')
+    tmpId = ret.data._id
   })
 
   it('batch objects', function* () {
@@ -23,7 +22,7 @@ describe('bucket', function() {
       { title: 't2' },
       { title: 't3' }
     ]).batch()
-    assert(ret.stories.length === 3)
+    assert(ret.data.length === 3)
     assert(ret.meta.ok === 1)
     assert(ret.meta.n === 3)
   })
@@ -39,41 +38,41 @@ describe('bucket', function() {
   })
 
   it('get object', function* () {
-    const object = yield bucket.get(tmpId)
-    assert(object.title === 'hello')
-    assert(object._id.toString() === tmpId.toString())
+    const ret = yield bucket.get(tmpId)
+    assert(ret.data.title === 'hello')
+    assert(ret.data._id.toString() === tmpId.toString())
   })
 
   it('patch object', function* () {
     const ret = yield bucket.body({ title: 'abc', desc: 'def' }).post()
-    assert(ret.story.title === 'abc')
-    assert(ret.story.desc === 'def')
+    assert(ret.data.title === 'abc')
+    assert(ret.data.desc === 'def')
 
-    const storyId = ret.story._id
+    const storyId = ret.data._id
     const ret2 = yield bucket.body({ title: 'def' }).patch(storyId)
     assert(ret2.meta.ok === 1)
     assert(ret2.meta.nModified === 1)
     assert(ret2.meta.n === 1)
 
-    const object = yield bucket.get(storyId)
-    assert(object.title === 'def')
-    assert(object.desc === 'def')
+    const ret3 = yield bucket.get(storyId)
+    assert(ret3.data.title === 'def')
+    assert(ret3.data.desc === 'def')
   })
 
   it('put object', function* () {
     const ret1 = yield bucket.body({ title: 'abc', desc: 'def' }).post()
-    assert(ret1.story.title === 'abc')
-    assert(ret1.story.desc === 'def')
+    assert(ret1.data.title === 'abc')
+    assert(ret1.data.desc === 'def')
 
-    const storyId = ret1.story._id
+    const storyId = ret1.data._id
     const ret2 = yield bucket.body({ title: 'def' }).put(storyId)
     assert(ret2.meta.ok === 1)
     assert(ret2.meta.nModified === 1)
     assert(ret2.meta.n === 1)
 
-    const object = yield bucket.get(storyId)
-    assert(object.title === 'def')
-    assert(object.desc === undefined)
+    const ret3 = yield bucket.get(storyId)
+    assert(ret3.data.title === 'def')
+    assert(ret3.data.desc === undefined)
   })
 
   it('remove object', function* () {
@@ -86,7 +85,7 @@ describe('bucket', function() {
   it('other bucket', function* () {
     const bkt = dw.bucket('test/testbucket2')
     const obj = yield bkt.body({ title: 'other' }).post()
-    assert(obj.story.title === 'other')
+    assert(obj.data.title === 'other')
     assert(obj.meta.ok === 1)
     assert(obj.meta.n === 1)
   })
