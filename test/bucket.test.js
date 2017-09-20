@@ -43,7 +43,7 @@ describe('bucket', function() {
     assert(ret.data._id.toString() === tmpId.toString())
   })
 
-  it('patch object', function* () {
+  it('patch object by id', function* () {
     const ret = yield bucket.body({ title: 'abc', desc: 'def' }).post()
     assert(ret.data.title === 'abc')
     assert(ret.data.desc === 'def')
@@ -59,7 +59,21 @@ describe('bucket', function() {
     assert(ret3.data.desc === 'def')
   })
 
-  it('put object', function* () {
+  it('patch object by query', function* () {
+    const ret1 = yield bucket.body({ title: 'a', type: 1 }).post()
+    const ret2 = yield bucket.body({ title: 'b', type: 1 }).post()
+    assert(ret1.data.title === 'a')
+    assert(ret2.data.title === 'b')
+    const ret3 = yield bucket.body({ title: 'c' }).patch({
+      type: {
+        $eq: 1
+      }
+    })
+    assert(ret3.meta.ok === 1)
+    assert(ret3.meta.nModified === 2)
+  })
+
+  it('put object by id', function* () {
     const ret1 = yield bucket.body({ title: 'abc', desc: 'def' }).post()
     assert(ret1.data.title === 'abc')
     assert(ret1.data.desc === 'def')
