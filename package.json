@@ -1,6 +1,6 @@
 {
   "name": "dataware",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "DataWare",
   "main": "index.js",
   "scripts": {
