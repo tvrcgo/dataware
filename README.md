@@ -22,29 +22,26 @@ const dataware = new Dataware({
 
 ### Bucket
 
-#### Basic
-
 ```js
 const bucket = dataware.bucket('db/collection')
 
+// CRUD
 bucket.get('object-id')
 bucket.body(object).post()
 bucket.body(object).post('object-id')
-bucket.body([ object1, object2, object3 ]).batch()
 bucket.body(patchBody).patch('object-id')
 bucket.body(newBody).put('object-id')
 bucket.remove('object-id')
-bucket.drop()
+
+// batch objects
+bucket.body([ object1, object2, object3 ]).batch()
 
 // modify by query
 bucket.body(patchBody).patch({ type: { $eq: 1 } })
 bucket.body(newBody).put({ name: { $eq: 'aaa' }})
 bucket.remove({ number: { $gt: 5 }})
-```
 
-#### Query
-
-```js
+// query object(s)
 bucket.query({
   where: {
     title: {
@@ -57,4 +54,7 @@ bucket.query({
     created_at: -1
   }
 })
+
+// drop bucket
+bucket.drop()
 ```

@@ -4,11 +4,11 @@ const assert = require('power-assert')
 describe('dataware', function() {
 
   const dw = new Dataware({
-    auth: 'weilai:weilai',
-    endpoint: 'tvrcgo.com:27077'
+    auth: 'admin:admin',
+    endpoint: 'localhost:27017'
   })
 
-  it('cannot connect', function* () {
+  it('error: cannot connect', function* () {
     const dw2 = new Dataware({
       endpoint: 'error-host.com:27017'
     })
@@ -17,7 +17,7 @@ describe('dataware', function() {
     })
   })
 
-  it('no endpoint', function* () {
+  it('error: no endpoint', function* () {
     const dw2 = new Dataware({})
     yield dw2.bucket('test/testbucket2').get('hello').catch(err => {
       assert(err.message === 'Missing endpoint.')
