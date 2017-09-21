@@ -5,6 +5,7 @@ const assert = require('power-assert')
 describe('bucket', function() {
 
   const dw = new Dataware({
+    auth: 'admin:admin',
     endpoint: 'localhost:27017'
   })
   const bucket = dw.bucket('test/testbucket')
