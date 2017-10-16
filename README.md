@@ -24,23 +24,21 @@ const dataware = new Dataware({
 
 ```js
 const bucket = dataware.bucket('db/collection')
+```
 
-// CRUD
-bucket.get('object-id')
+Create
+```js
+// post object
 bucket.body(object).post()
 bucket.body(object).post('object-id')
-bucket.body(patchBody).patch('object-id')
-bucket.body(newBody).put('object-id')
-bucket.remove('object-id')
-
 // batch objects
 bucket.body([ object1, object2, object3 ]).batch()
+```
 
-// modify by query
-bucket.body(patchBody).patch({ type: { $eq: 1 } })
-bucket.body(newBody).put({ name: { $eq: 'aaa' }})
-bucket.remove({ number: { $gt: 5 }})
-
+Read
+```js
+// get object by id
+bucket.get('object-id')
 // query object(s)
 bucket.query({
   where: {
@@ -54,7 +52,24 @@ bucket.query({
     created_at: -1
   }
 })
+```
 
+Update
+```js
+// update object by id
+bucket.body(patchBody).patch('object-id')
+bucket.body(newBody).put('object-id')
+// update object(s) by query
+bucket.body(patchBody).patch({ type: { $eq: 1 } })
+bucket.body(newBody).put({ name: { $eq: 'aaa' }})
+```
+
+Delete
+```js
+// remove object by id
+bucket.remove('object-id')
+// remove object(s) by query
+bucket.remove({ number: { $gt: 5 }})
 // drop bucket
 bucket.drop()
 ```
