@@ -1,4 +1,4 @@
-const Dataware = require('../index')
+const Dataware = require('../lib/index')
 const assert = require('power-assert')
 
 describe('dataware', function() {

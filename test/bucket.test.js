@@ -1,5 +1,5 @@
 
-const Dataware = require('../index')
+const Dataware = require('../lib/index')
 const assert = require('power-assert')
 
 describe('bucket', function() {
@@ -115,7 +115,7 @@ describe('bucket', function() {
   })
 
   it('remove object by query', function* (){
-    yield bucket.body([{ title: 'a' }, { title: 'a' }]).batch()
+    yield bucket.body([{ title: 'a' }, { title: 'a' }]).post()
     const ret = yield bucket.remove({
       title: {
         $eq: 'a'
