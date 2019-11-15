@@ -4,8 +4,8 @@
   "description": "DataWare",
   "main": "lib/index.js",
   "scripts": {
-    "test": "loop test",
-    "cov": "loop cov"
+    "test": "node scripts/test.js",
+    "cov": "node scripts/cov.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,9 @@
     "mongodb": "^2.2.21"
   },
   "devDependencies": {
-    "webpack-compile-loop": "^0.4.4"
+    "intelli-espower-loader": "^1.0.1",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
+    "power-assert": "^1.6.1"
   }
 }
