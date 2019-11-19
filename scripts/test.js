@@ -6,6 +6,7 @@ const mocha = require.resolve('mocha/bin/_mocha')
 const args = [
   '--require',
   'intelli-espower-loader',
+  '--exit',
   'test/**/*.test.js'
 ]
 
