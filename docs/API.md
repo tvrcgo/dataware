@@ -95,7 +95,11 @@ const res = await search.index('indexName').remove('doc-id')
 
 Update document
 ```js
+// patch
 const res = await search.index('indexName').body(patchBody).patch('doc-id')
+
+// replace
+const res = await search.index('indexName').body(putBody).put('doc-id')
 ```
 
 Get document

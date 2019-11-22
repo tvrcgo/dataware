@@ -33,20 +33,29 @@ describe('Search', () => {
     assert(res2.result === 'created')
   })
 
-  it('update document', async () => {
+  it('update document (patch)', async () => {
     const res = await search.index(indexName).body({
       title: 'title2'
     }).patch(docId)
     assert(res.result === 'updated')
-
     const doc = await search.index(indexName).get(docId)
     assert(doc.title === 'title2')
+  })
+
+  it('update document (replace)', async () => {
+    const res = await search.index(indexName).body({
+      title: 'xxx'
+    }).put(docId)
+    assert(res.result === 'updated')
+    const doc = await search.index(indexName).get(docId)
+    assert(doc.title === 'xxx')
+    assert(doc.desc === undefined)
   })
 
   it('query documents', async () => {
     await sleep(1000)
     const data = await search.index(indexName).query('q=desc:(ab)')
-    assert(data.length === 2)
+    assert(data.length === 1)
   })
 
   it('remove document', async () => {
