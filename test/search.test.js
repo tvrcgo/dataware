@@ -25,12 +25,15 @@ describe('Search', () => {
     }).post()
     assert(res.result === 'created')
     docId = res._id
+  })
 
-    const res2 = await search.index(indexName).body({
+  it('create document using specified _id', async () => {
+    const res = await search.index(indexName).body({
       title: 'new title2',
       desc: 'ab'
-    }).post()
-    assert(res2.result === 'created')
+    }).post('abcdefg')
+    assert(res.result === 'created')
+    assert(res._id === 'abcdefg')
   })
 
   it('update document (patch)', async () => {
