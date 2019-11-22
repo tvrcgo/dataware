@@ -13,7 +13,7 @@ describe('bucket', () => {
 
   it('post object', async () => {
     const ret = await bucket.use('testbucket').body({ title: 'hello' }).post()
-    assert(ret.data.title = 'hello')
+    assert(ret.data.title === 'hello')
     tmpId = ret.data._id
   })
 
