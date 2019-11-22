@@ -74,7 +74,9 @@ const { Search } = require('dataware')
 
 const search = new Search({
   host: 'http://localhost:9200',
-  version: 5.6
+  version: 5.6,
+  username: 'user1',
+  password: '123456'
 })
 ```
 
