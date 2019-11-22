@@ -87,7 +87,11 @@ const res = await search.index('indexName').create()
 
 Create document
 ```js
+// auto-generate _id
 const res = await search.index('indexName').body(payload).post()
+
+// specified _id
+const res = await search.index('indexName').body(payload).post('doc-id')
 ```
 
 Remove document
