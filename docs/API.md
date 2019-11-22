@@ -28,7 +28,7 @@ Read
 // get object by id
 bucket.use('collection').get('object-id')
 
-// query use(s)
+// query objects
 bucket.use('collection').query({
   where: {
     title: {
@@ -49,7 +49,7 @@ Update
 bucket.use('collection').body(patchBody).patch('object-id')
 bucket.use('collection').body(newBody).put('object-id')
 
-// update use(s) by query
+// update objects by condition
 bucket.use('collection').body(patchBody).patch({ type: { $eq: 1 } })
 bucket.use('collection').body(newBody).put({ name: { $eq: 'aaa' }})
 ```
@@ -59,9 +59,9 @@ Delete
 // remove object by id
 bucket.use('collection').remove('object-id')
 
-// remove use(s) by query
+// remove objects by condition
 bucket.use('collection').remove({ number: { $gt: 5 }})
 
-// drop bucket
+// drop collection
 bucket.use('collection').drop()
 ```
