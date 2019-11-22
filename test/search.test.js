@@ -13,8 +13,8 @@ describe('Search', () => {
   const indexName = 'sdktest'
   let docId = ''
 
-  it('initialize index', async () => {
-    const res = await search.index(indexName).init()
+  it('create index', async () => {
+    const res = await search.index(indexName).create()
     assert(res.index === indexName)
   })
 

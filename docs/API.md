@@ -80,7 +80,7 @@ const search = new Search({
 
 Create index
 ```js
-const res = await search.index('indexName').init()
+const res = await search.index('indexName').create()
 ```
 
 Create document
