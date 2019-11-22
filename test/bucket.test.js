@@ -2,7 +2,7 @@
 const { Bucket } = require('../lib/index')
 const assert = require('power-assert')
 
-describe('bucket', () => {
+describe('Bucket', () => {
 
   const bucket = new Bucket({
     endpoint: 'localhost:27017',

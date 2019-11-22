@@ -8,4 +8,5 @@ npm i dataware --save
 
 ## Docs
 
-- [API](docs/API.md)
+- [Bucket](docs/API.md#bucket)
+- [Search](docs/API.md#search)

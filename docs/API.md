@@ -3,7 +3,7 @@
 ## Bucket
 
 ```js
-import { Bucket } from 'dataware'
+const { Bucket } = require('dataware')
 
 const bucket = new Bucket({
   auth: 'username:password',
@@ -64,4 +64,51 @@ bucket.use('collection').remove({ number: { $gt: 5 }})
 
 // drop collection
 bucket.use('collection').drop()
+```
+
+
+## Search
+
+```js
+const { Search } = require('dataware')
+
+const search = new Search({
+  host: 'http://localhost:9200',
+  version: 5.6
+})
+```
+
+Create index
+```js
+const res = await search.index('indexName').init()
+```
+
+Create document
+```js
+const res = await search.index('indexName').body(payload).post()
+```
+
+Remove document
+```js
+const res = await search.index('indexName').remove('doc-id')
+```
+
+Update document
+```js
+const res = await search.index('indexName').body(patchBody).patch('doc-id')
+```
+
+Get document
+```js
+const res = await search.index('indexName').get('doc-id')
+```
+
+Query documents
+```js
+const res = await search.index('indexName').query('q=title:(abc)')
+```
+
+Remove index
+```js
+const res = await search.index('indexName').drop()
 ```
