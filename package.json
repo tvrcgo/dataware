@@ -1,5 +1,5 @@
 {
-  "name": "dataware",
+  "name": "@tvrcgo/dataware",
   "version": "0.1.0",
   "description": "DataWare",
   "main": "lib/index.js",
