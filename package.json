@@ -15,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.0",
-    "mongodb": "^2.2.21"
+    "mongodb": "^3.6.1"
   },
   "devDependencies": {
     "intelli-espower-loader": "^1.0.1",
